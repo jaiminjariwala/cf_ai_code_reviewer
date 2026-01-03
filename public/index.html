@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Reviewer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+    #input:empty:before { content: attr(data-placeholder); color: #94a3b8; }
+    .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+    /* Gray-scale Code Highlighting */
+    .hl-keyword { color: #475569; font-weight: 600; } /* Slate 600 */
+    .hl-string { color: #64748b; } /* Slate 500 */
+    .hl-number { color: #94a3b8; } /* Slate 400 */
+    .hl-comment { color: #cbd5e1; font-style: italic; } /* Slate 300 */
+    .hl-func { color: #334155; } /* Slate 700 */
+    code { color: #334155; }
+  </style>
+</head>
+<body class="bg-[#F9FAFB] text-slate-900 h-screen flex overflow-hidden">
+
+  <aside id="sidebar" class="w-72 bg-slate-50 border-r border-slate-200 flex flex-col transition-all duration-300 transform shrink-0">
+    <div class="p-6">
+      <button onclick="newChat()" class="w-full py-2.5 px-4 bg-white border border-slate-200 text-slate-700 rounded-xl text-sm font-[400] flex items-center justify-center gap-2 hover:bg-slate-100 hover:border-slate-300 transition-all shadow-sm active:scale-[0.98]">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        New Chat
+      </button>
+    </div>
+    <div id="conversationsList" class="flex-1 overflow-y-auto px-4 custom-scrollbar pb-10"></div>
+  </aside>
+
+  <main class="flex-1 flex flex-col relative bg-white min-w-0">
+    
+    <header class="h-16 border-b border-slate-100 flex items-center px-6 justify-between shrink-0">
+      <div class="flex items-center gap-4">
+        <button onclick="toggleSidebar()" class="p-2 hover:bg-slate-100 rounded-lg transition-colors text-slate-400 hover:text-slate-900">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg>
+        </button>
+        <span class="text-sm font-[400] text-slate-900 tracking-tight">Code Reviewer</span>
+      </div>
+    </header>
+
+    <div id="messages" class="flex-1 overflow-y-auto custom-scrollbar py-10">
+      <div class="welcome-container w-full max-w-4xl mx-auto px-6 text-center pt-16">
+        <h1 class="text-4xl font-medium text-slate-900 tracking-tight mb-4">Code Review, Simplified.</h1>
+        <p class="text-slate-500 text-lg mb-12 max-w-2xl mx-auto">Instant professional feedback on performance, logic, and security vulnerabilities.</p>
+        
+        <div class="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
+          <button onclick="document.getElementById('input').innerText='Review this code for bugs:\n\n';document.getElementById('input').focus();" class="p-5 bg-white border border-slate-200 rounded-2xl text-left hover:border-slate-400 transition-all group shadow-sm">
+            <span class="block font-medium text-slate-900 mb-1">Find Bugs</span>
+            <span class="text-xs text-slate-400">Analyze logic and syntax errors</span>
+          </button>
+          <button onclick="document.getElementById('input').innerText='Optimize this code for speed:\n\n';document.getElementById('input').focus();" class="p-5 bg-white border border-slate-200 rounded-2xl text-left hover:border-slate-400 transition-all group shadow-sm">
+            <span class="block font-medium text-slate-900 mb-1">Optimize</span>
+            <span class="text-xs text-slate-400">Improve execution performance</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="p-6">
+      <div class="max-w-4xl mx-auto">
+        <div class="relative bg-white rounded-2xl border border-slate-200 shadow-sm focus-within:border-slate-400 focus-within:ring-4 focus-within:ring-slate-50 transition-all overflow-hidden">
+          <div id="input" 
+               class="w-full min-h-[60px] max-h-60 p-5 outline-none text-[15px] leading-relaxed custom-scrollbar overflow-y-auto font-medium" 
+               contenteditable="true" 
+               data-placeholder="Paste code or ask a question..."></div>
+          
+          <div class="flex items-center justify-between px-5 py-3 bg-slate-50/50 border-t border-slate-100">
+            <span class="text-[10px] text-slate-400 font-bold uppercase tracking-tight">Enter to Send</span>
+            <button id="sendBtn" class="bg-slate-900 text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-slate-800 transition-all active:scale-95 flex items-center gap-2">
+              Send
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="/main.js"></script>
+</body>
+</html>
