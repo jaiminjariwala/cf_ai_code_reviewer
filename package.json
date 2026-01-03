@@ -1,0 +1,25 @@
+{
+  "name": "cf_ai_code_review_buddy",
+  "version": "1.0.0",
+  "description": "AI-powered code review assistant built on Cloudflare",
+  "main": "src/index.ts",
+  "scripts": {
+    "build:css": "npx @tailwindcss/cli@latest -i ./public/input.css -o ./public/styles.css --minify",
+    "watch:css": "npx @tailwindcss/cli@latest -i ./public/input.css -o ./public/styles.css --watch",
+    "dev": "npm run build:css && wrangler dev",
+    "dev:local": "npm run build:css && wrangler dev --local",
+    "deploy": "npm run build:css && wrangler deploy"
+  },
+  "keywords": ["cloudflare", "workers", "ai", "code-review"],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "hono": "^4.11.3"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241127.0",
+    "@tailwindcss/cli": "^4.1.0",
+    "tailwindcss": "^4.1.18"
+  }
+}

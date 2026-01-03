@@ -1,0 +1,21 @@
+name = "code-review-buddy"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# Workers AI binding
+[ai]
+binding = "AI"
+
+# Durable Objects
+[[durable_objects.bindings]]
+name = "SESSIONS"
+class_name = "SessionManager"
+script_name = "code-review-buddy"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["SessionManager"]
+
+# Static assets
+[assets]
+directory = "./public"
